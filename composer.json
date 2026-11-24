@@ -39,5 +39,9 @@
                 "Uc\\ThumbnailGenerator\\ThumbnailGeneratorServiceProvider"
             ]
         }
+    },
+    "scripts": {
+        "coverage": "php -d pcov.enabled=1 ./vendor/bin/phpunit tests --coverage-html coverage",
+        "test": "./vendor/bin/phpunit tests"
     }
 }

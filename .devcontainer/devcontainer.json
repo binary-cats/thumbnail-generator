@@ -21,7 +21,6 @@
       }
     },
     "remoteUser": "vscode",
-    "postCreateCommand": "cat .devcontainer/devcontainer.bash >> /home/vscode/.bashrc",
     "forwardPorts": [],
     "portsAttributes": {}
   }

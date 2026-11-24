@@ -8,6 +8,8 @@ RUN mkdir -p /var/www/html
 
 # Install Dependencies
 RUN apt-get update && apt-get install -y --no-install-recommends \
+    ffmpeg \
+    ghostscript \
     imagemagick \
     php8.5-cli \
     php8.5-gd \
@@ -15,6 +17,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     php8.5-bcmath \
     php8.5-curl \
     php8.5-mbstring \
+    php8.5-pcov \
     php8.5-xml \
     php8.5-xsl \
     php8.5-zip \

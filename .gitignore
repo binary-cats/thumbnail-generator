@@ -1,4 +1,6 @@
-/vendor/
 .idea
+.phpunit.cache
 .phpunit.result.cache
 /bootstrap
+/coverage
+/vendor
