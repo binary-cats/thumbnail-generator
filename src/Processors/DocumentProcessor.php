@@ -4,7 +4,12 @@ declare(strict_types=1);
 
 namespace Uc\ThumbnailGenerator\Processors;
 
+use function base_path;
+
 use Illuminate\Http\UploadedFile;
+
+use function pathinfo;
+
 use PhpOffice\PhpSpreadsheet\Writer\IWriter;
 use PhpOffice\PhpWord\Exception\Exception as PhpWordException;
 use PhpOffice\PhpWord\IOFactory;
@@ -12,8 +17,6 @@ use PhpOffice\PhpWord\Settings;
 use PhpOffice\PhpWord\Writer\PDF;
 use PhpOffice\PhpWord\Writer\WriterInterface;
 
-use function base_path;
-use function pathinfo;
 use function stream_get_meta_data;
 use function tmpfile;
 
@@ -120,7 +123,7 @@ class DocumentProcessor
         return $this->pdfProcessor->generateThumbnail(
             new UploadedFile($path, pathinfo($path, PATHINFO_FILENAME)),
             $width,
-            $height
+            $height,
         );
     }
 }

@@ -21,9 +21,9 @@ class DocumentThumbnailGeneratorTest extends AbstractThumbnailGenerator
     {
         $generator = $this->getThumbnailGenerator();
         $content = $generator->generate(
-            new UploadedFile(__DIR__.'/sources/document.docx', 'document.docx'),
+            new UploadedFile(__DIR__ . '/sources/document.docx', 'document.docx'),
             100,
-            100
+            100,
         );
 
         $this->assertImageProperties($content, 100, 100);
@@ -33,9 +33,9 @@ class DocumentThumbnailGeneratorTest extends AbstractThumbnailGenerator
     {
         $generator = $this->getThumbnailGenerator();
         $content = $generator->generate(
-            new UploadedFile(__DIR__.'/sources/document.odt', 'document.odt'),
+            new UploadedFile(__DIR__ . '/sources/document.odt', 'document.odt'),
             150,
-            200
+            200,
         );
 
         $this->assertImageProperties($content, 150, 200);
@@ -45,9 +45,9 @@ class DocumentThumbnailGeneratorTest extends AbstractThumbnailGenerator
     {
         $generator = $this->getThumbnailGenerator();
         $content = $generator->generate(
-            new UploadedFile(__DIR__.'/sources/document.rtf', 'document.rtf'),
+            new UploadedFile(__DIR__ . '/sources/document.rtf', 'document.rtf'),
             100,
-            100
+            100,
         );
 
         $this->assertImageProperties($content, 100, 100);
@@ -61,34 +61,34 @@ class DocumentThumbnailGeneratorTest extends AbstractThumbnailGenerator
                     new PdfProcessor(
                         new ImageManipulator(
                             new ImageManager(
-                                new Driver
-                            )
-                        )
-                    )
-                )
+                                new Driver(),
+                            ),
+                        ),
+                    ),
+                ),
             ),
             new OdtDriver(
                 new DocumentProcessor(
                     new PdfProcessor(
                         new ImageManipulator(
                             new ImageManager(
-                                new Driver
-                            )
-                        )
-                    )
-                )
+                                new Driver(),
+                            ),
+                        ),
+                    ),
+                ),
             ),
             new RtfDriver(
                 new DocumentProcessor(
                     new PdfProcessor(
                         new ImageManipulator(
                             new ImageManager(
-                                new Driver
-                            )
-                        )
-                    )
-                )
-            )
+                                new Driver(),
+                            ),
+                        ),
+                    ),
+                ),
+            ),
         );
     }
 }

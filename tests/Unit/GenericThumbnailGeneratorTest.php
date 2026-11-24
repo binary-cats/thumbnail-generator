@@ -17,19 +17,19 @@ class GenericThumbnailGeneratorTest extends AbstractThumbnailGenerator
     public static function mediaProvider(): array
     {
         return [
-            [__DIR__.'/sources/audio_with_artwork.mp3', 'audio_with_artwork.mp3', 'image/jpeg'], // audio
-            [__DIR__.'/sources/document.docx', 'document.docx', 'image/jpeg'], // document
-            [__DIR__.'/sources/document.odt', 'document.odt', 'image/jpeg'], // document
-            [__DIR__.'/sources/document.rtf', 'document.rtf', 'image/jpeg'], // document
-            [__DIR__.'/sources/image.png', 'image.png', 'image/png'], // image
-            [__DIR__.'/sources/pdf.pdf', 'pdf.pdf', 'image/jpeg'], // pdf
-            [__DIR__.'/sources/webm.webm', 'webm.webm', 'image/jpeg'], // video
-            [__DIR__.'/sources/mov.mov', 'mov.mov', 'image/jpeg'], // video
-            [__DIR__.'/sources/asf.asf', 'asf.asf', 'image/jpeg'], // video
-            [__DIR__.'/sources/mkv.mkv', 'mkv.mkv', 'image/jpeg'], // video
-            [__DIR__.'/sources/avi.avi', 'avi.avi', 'image/jpeg'], // video
-            [__DIR__.'/sources/flv.flv', 'flv.flv', 'image/jpeg'], // video
-            [__DIR__.'/sources/mp4.mp4', 'mp4.mp4', 'image/jpeg'], // video
+            [__DIR__ . '/sources/audio_with_artwork.mp3', 'audio_with_artwork.mp3', 'image/jpeg'], // audio
+            [__DIR__ . '/sources/document.docx', 'document.docx', 'image/jpeg'], // document
+            [__DIR__ . '/sources/document.odt', 'document.odt', 'image/jpeg'], // document
+            [__DIR__ . '/sources/document.rtf', 'document.rtf', 'image/jpeg'], // document
+            [__DIR__ . '/sources/image.png', 'image.png', 'image/png'], // image
+            [__DIR__ . '/sources/pdf.pdf', 'pdf.pdf', 'image/jpeg'], // pdf
+            [__DIR__ . '/sources/webm.webm', 'webm.webm', 'image/jpeg'], // video
+            [__DIR__ . '/sources/mov.mov', 'mov.mov', 'image/jpeg'], // video
+            [__DIR__ . '/sources/asf.asf', 'asf.asf', 'image/jpeg'], // video
+            [__DIR__ . '/sources/mkv.mkv', 'mkv.mkv', 'image/jpeg'], // video
+            [__DIR__ . '/sources/avi.avi', 'avi.avi', 'image/jpeg'], // video
+            [__DIR__ . '/sources/flv.flv', 'flv.flv', 'image/jpeg'], // video
+            [__DIR__ . '/sources/mp4.mp4', 'mp4.mp4', 'image/jpeg'], // video
         ];
     }
 
@@ -37,7 +37,7 @@ class GenericThumbnailGeneratorTest extends AbstractThumbnailGenerator
     public function test_generate_with_different_formats_returns_thumbnail(
         string $path,
         string $name,
-        ?string $mime
+        ?string $mime,
     ): void {
         $generator = $this
             ->getThumbnailGeneratorFactory()
@@ -53,15 +53,15 @@ class GenericThumbnailGeneratorTest extends AbstractThumbnailGenerator
             new FFMpegProcessor(
                 new ImageManipulator(
                     new ImageManager(
-                        new Driver
-                    )
-                )
+                        new Driver(),
+                    ),
+                ),
             ),
             new ImageManipulator(
                 new ImageManager(
-                    new Driver
-                )
-            )
+                    new Driver(),
+                ),
+            ),
         );
     }
 }

@@ -14,13 +14,13 @@ class TestCase extends BaseTestCase
     /**
      * Get package providers.
      *
-     * @param  Application  $app
+     * @param Application $app
      * @return array<int, class-string>
      */
     protected function getPackageProviders($app): array
     {
         $app->setBasePath(dirname(__DIR__));
-        (new Filesystem)->ensureDirectoryExists($app->bootstrapPath('cache'));
+        (new Filesystem())->ensureDirectoryExists($app->bootstrapPath('cache'));
 
         return [
             ThumbnailGeneratorServiceProvider::class,

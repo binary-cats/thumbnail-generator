@@ -5,9 +5,10 @@ declare(strict_types=1);
 namespace Uc\ThumbnailGenerator\Drivers;
 
 use Illuminate\Http\UploadedFile;
-use Uc\ThumbnailGenerator\Processors\FFMpegProcessor;
 
 use function in_array;
+
+use Uc\ThumbnailGenerator\Processors\FFMpegProcessor;
 
 /**
  * Driver for generating thumbnails for audio files.

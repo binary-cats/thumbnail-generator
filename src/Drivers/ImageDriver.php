@@ -4,11 +4,13 @@ declare(strict_types=1);
 
 namespace Uc\ThumbnailGenerator\Drivers;
 
-use Illuminate\Http\UploadedFile;
-use Uc\ImageManipulator\ImageManipulator;
-
 use function file_get_contents;
+
+use Illuminate\Http\UploadedFile;
+
 use function in_array;
+
+use Uc\ImageManipulator\ImageManipulator;
 
 /**
  * Driver for generating thumbnails for image files.

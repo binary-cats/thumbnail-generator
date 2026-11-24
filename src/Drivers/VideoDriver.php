@@ -5,9 +5,10 @@ declare(strict_types=1);
 namespace Uc\ThumbnailGenerator\Drivers;
 
 use Illuminate\Http\UploadedFile;
-use Uc\ThumbnailGenerator\Processors\FFMpegProcessor;
 
 use function in_array;
+
+use Uc\ThumbnailGenerator\Processors\FFMpegProcessor;
 
 /**
  * Driver for generating thumbnails for video files.
@@ -24,7 +25,7 @@ class VideoDriver implements ThumbnailGenerationDriverInterface
         return in_array(
             $file->guessExtension(),
             ['mp4', 'flv', 'avi', 'mkv', 'asf', 'webm', 'mov', 'ogg', 'ogv', 'svg'],
-            true
+            true,
         );
     }
 

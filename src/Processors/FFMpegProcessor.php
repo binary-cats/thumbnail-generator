@@ -4,18 +4,22 @@ declare(strict_types=1);
 
 namespace Uc\ThumbnailGenerator\Processors;
 
+use function config;
+
 use FFMpeg\Coordinate\TimeCode;
 use FFMpeg\FFMpeg;
 use FFMpeg\Media\Audio;
 use FFMpeg\Media\Frame;
 use FFMpeg\Media\Video;
-use Illuminate\Http\UploadedFile;
-use Uc\ImageManipulator\ImageManipulator;
 
-use function config;
 use function file_get_contents;
+
+use Illuminate\Http\UploadedFile;
+
 use function stream_get_meta_data;
 use function tmpfile;
+
+use Uc\ImageManipulator\ImageManipulator;
 
 /**
  * Utility class wraps "ffmpeg" library to provide thumbnail generation mechanism for audio and video files.

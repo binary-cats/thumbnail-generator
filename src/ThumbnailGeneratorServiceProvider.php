@@ -22,8 +22,8 @@ class ThumbnailGeneratorServiceProvider extends ServiceProvider
     public function register(): void
     {
         $this->mergeConfigFrom(
-            __DIR__.'/../config/config.php',
-            'thumbnail-generator'
+            __DIR__ . '/../config/config.php',
+            'thumbnail-generator',
         );
 
         $this->app->singleton(FFMpegProcessor::class, function () {
@@ -33,7 +33,7 @@ class ThumbnailGeneratorServiceProvider extends ServiceProvider
         $this->app->bind(ThumbnailGeneratorFactory::class, function () {
             return new ThumbnailGeneratorFactory(
                 $this->app->get(FFMpegProcessor::class),
-                $this->app->get(ImageManipulator::class)
+                $this->app->get(ImageManipulator::class),
             );
         });
     }
@@ -46,9 +46,9 @@ class ThumbnailGeneratorServiceProvider extends ServiceProvider
         if ($this->app->runningInConsole()) {
             $this->publishes(
                 [
-                    __DIR__.'/../config/config.php' => config_path('thumbnail-generator.php'),
+                    __DIR__ . '/../config/config.php' => config_path('thumbnail-generator.php'),
                 ],
-                'thumbnail-generator'
+                'thumbnail-generator',
             );
         }
     }

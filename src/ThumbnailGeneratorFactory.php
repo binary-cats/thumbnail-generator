@@ -23,7 +23,7 @@ class ThumbnailGeneratorFactory
 {
     public function __construct(
         protected FFMpegProcessor $ffmpegProcessor,
-        protected ImageManipulator $imageManipulator
+        protected ImageManipulator $imageManipulator,
     ) {}
 
     /**
@@ -33,13 +33,13 @@ class ThumbnailGeneratorFactory
     {
         return new ThumbnailGenerator(
             new ImageDriver(
-                $this->imageManipulator
+                $this->imageManipulator,
             ),
             new AudioDriver(
-                $this->ffmpegProcessor
+                $this->ffmpegProcessor,
             ),
             new VideoDriver(
-                $this->ffmpegProcessor
+                $this->ffmpegProcessor,
             ),
             ...$this->createDocumentAwareThumbnailDrivers(),
         );
@@ -52,8 +52,8 @@ class ThumbnailGeneratorFactory
     {
         return new ThumbnailGenerator(
             new ImageDriver(
-                $this->imageManipulator
-            )
+                $this->imageManipulator,
+            ),
         );
     }
 
@@ -64,8 +64,8 @@ class ThumbnailGeneratorFactory
     {
         return new ThumbnailGenerator(
             new AudioDriver(
-                $this->ffmpegProcessor
-            )
+                $this->ffmpegProcessor,
+            ),
         );
     }
 
@@ -76,8 +76,8 @@ class ThumbnailGeneratorFactory
     {
         return new ThumbnailGenerator(
             new VideoDriver(
-                $this->ffmpegProcessor
-            )
+                $this->ffmpegProcessor,
+            ),
         );
     }
 
@@ -97,8 +97,8 @@ class ThumbnailGeneratorFactory
      * WebPAwareThumbnailGenerator maintains all the original functionality while adding
      * support for WebP, a modern image format that provides superior compression.
      *
-     * @param  ThumbnailGenerator  $generator  The original ThumbnailGenerator instance to be
-     *                                         enhanced.
+     * @param ThumbnailGenerator $generator The original ThumbnailGenerator instance to be
+     *                                      enhanced.
      * @return WebPAwareThumbnailGenerator A new instance of WebPAwareThumbnailGenerator that
      *                                     supports WebP generation.
      */

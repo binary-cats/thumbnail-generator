@@ -42,12 +42,12 @@ class WebPAwareThumbnailGenerator
     /**
      * Generate thumbnail of the given file in both the original format and WebP format.
      *
-     * @param  UploadedFile  $file
-     *                              The uploaded file from which the thumbnail will be generated.
-     * @param  int  $width
-     *                      The desired width of the thumbnail.
-     * @param  int  $height
-     *                       The desired height of the thumbnail.
+     * @param UploadedFile $file
+     *                           The uploaded file from which the thumbnail will be generated.
+     * @param int $width
+     *                   The desired width of the thumbnail.
+     * @param int $height
+     *                    The desired height of the thumbnail.
      * @return array
      *               An array containing the original thumbnail content and the WebP version.
      *               If generation fails, returns [null, null].

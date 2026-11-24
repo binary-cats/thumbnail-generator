@@ -18,9 +18,9 @@ class PdfThumbnailGeneratorTest extends AbstractThumbnailGenerator
     {
         $generator = $this->createThumbnailGenerator();
         $content = $generator->generate(
-            new UploadedFile(__DIR__.'/sources/pdf.pdf', 'pdf.pdf'),
+            new UploadedFile(__DIR__ . '/sources/pdf.pdf', 'pdf.pdf'),
             200,
-            300
+            300,
         );
 
         $this->assertImageProperties($content, 200, 300);
@@ -33,11 +33,11 @@ class PdfThumbnailGeneratorTest extends AbstractThumbnailGenerator
                 new PdfProcessor(
                     new ImageManipulator(
                         new ImageManager(
-                            new Driver
-                        )
-                    )
-                )
-            )
+                            new Driver(),
+                        ),
+                    ),
+                ),
+            ),
         );
     }
 }

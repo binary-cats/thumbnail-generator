@@ -17,9 +17,9 @@ class ImageThumbnailGeneratorTest extends AbstractThumbnailGenerator
     {
         $generator = $this->createThumbnailGenerator();
         $content = $generator->generate(
-            new UploadedFile(__DIR__.'/sources/image.png', 'image.png'),
+            new UploadedFile(__DIR__ . '/sources/image.png', 'image.png'),
             200,
-            300
+            300,
         );
 
         $this->assertImageProperties($content, 200, 300, 'image/png');
@@ -31,10 +31,10 @@ class ImageThumbnailGeneratorTest extends AbstractThumbnailGenerator
             new ImageDriver(
                 new ImageManipulator(
                     new ImageManager(
-                        new Driver
-                    )
-                )
-            )
+                        new Driver(),
+                    ),
+                ),
+            ),
         );
     }
 }

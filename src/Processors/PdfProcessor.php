@@ -42,7 +42,7 @@ class PdfProcessor
     protected function getFirstPageContent(UploadedFile $file): ?string
     {
         try {
-            $imagick = new Imagick;
+            $imagick = new Imagick();
             // Read first page of the file.
             $imagick->readImage(sprintf('%s[0]', $file->path()));
             $imagick->setImageFormat('jpeg');

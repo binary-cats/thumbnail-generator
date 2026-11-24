@@ -18,9 +18,9 @@ class AudioThumbnailGeneratorTest extends AbstractThumbnailGenerator
     {
         $generator = $this->getThumbnailGenerator();
         $content = $generator->generate(
-            new UploadedFile(__DIR__.'/sources/audio_with_artwork.mp3', 'audio_with_artwork.mp3'),
+            new UploadedFile(__DIR__ . '/sources/audio_with_artwork.mp3', 'audio_with_artwork.mp3'),
             100,
-            100
+            100,
         );
 
         $this->assertImageProperties($content, 100, 100);
@@ -33,11 +33,11 @@ class AudioThumbnailGeneratorTest extends AbstractThumbnailGenerator
                 new FFMpegProcessor(
                     new ImageManipulator(
                         new ImageManager(
-                            new Driver
-                        )
-                    )
-                )
-            )
+                            new Driver(),
+                        ),
+                    ),
+                ),
+            ),
         );
     }
 }

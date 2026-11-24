@@ -18,9 +18,9 @@ class VideoThumbnailGeneratorTest extends AbstractThumbnailGenerator
     {
         $generator = $this->createThumbnailGenerator();
         $content = $generator->generate(
-            new UploadedFile(__DIR__.'/sources/mp4.mp4', 'mp4.mp4'),
+            new UploadedFile(__DIR__ . '/sources/mp4.mp4', 'mp4.mp4'),
             100,
-            100
+            100,
         );
 
         $this->assertImageProperties($content, 100, 100);
@@ -30,9 +30,9 @@ class VideoThumbnailGeneratorTest extends AbstractThumbnailGenerator
     {
         $generator = $this->createThumbnailGenerator();
         $content = $generator->generate(
-            new UploadedFile(__DIR__.'/sources/flv.flv', 'flv.flv'),
+            new UploadedFile(__DIR__ . '/sources/flv.flv', 'flv.flv'),
             100,
-            100
+            100,
         );
 
         $this->assertImageProperties($content, 100, 100);
@@ -42,9 +42,9 @@ class VideoThumbnailGeneratorTest extends AbstractThumbnailGenerator
     {
         $generator = $this->createThumbnailGenerator();
         $content = $generator->generate(
-            new UploadedFile(__DIR__.'/sources/avi.avi', 'avi.avi'),
+            new UploadedFile(__DIR__ . '/sources/avi.avi', 'avi.avi'),
             100,
-            100
+            100,
         );
 
         $this->assertImageProperties($content, 100, 100);
@@ -54,9 +54,9 @@ class VideoThumbnailGeneratorTest extends AbstractThumbnailGenerator
     {
         $generator = $this->createThumbnailGenerator();
         $content = $generator->generate(
-            new UploadedFile(__DIR__.'/sources/mkv.mkv', 'mkv.mkv'),
+            new UploadedFile(__DIR__ . '/sources/mkv.mkv', 'mkv.mkv'),
             100,
-            100
+            100,
         );
 
         $this->assertImageProperties($content, 100, 100);
@@ -66,9 +66,9 @@ class VideoThumbnailGeneratorTest extends AbstractThumbnailGenerator
     {
         $generator = $this->createThumbnailGenerator();
         $content = $generator->generate(
-            new UploadedFile(__DIR__.'/sources/asf.asf', 'asf.asf'),
+            new UploadedFile(__DIR__ . '/sources/asf.asf', 'asf.asf'),
             100,
-            100
+            100,
         );
 
         $this->assertImageProperties($content, 100, 100);
@@ -78,9 +78,9 @@ class VideoThumbnailGeneratorTest extends AbstractThumbnailGenerator
     {
         $generator = $this->createThumbnailGenerator();
         $content = $generator->generate(
-            new UploadedFile(__DIR__.'/sources/webm.webm', 'webm.webm'),
+            new UploadedFile(__DIR__ . '/sources/webm.webm', 'webm.webm'),
             100,
-            100
+            100,
         );
 
         $this->assertImageProperties($content, 100, 100);
@@ -90,9 +90,9 @@ class VideoThumbnailGeneratorTest extends AbstractThumbnailGenerator
     {
         $generator = $this->createThumbnailGenerator();
         $content = $generator->generate(
-            new UploadedFile(__DIR__.'/sources/mov.mov', 'mov.mov'),
+            new UploadedFile(__DIR__ . '/sources/mov.mov', 'mov.mov'),
             100,
-            100
+            100,
         );
 
         $this->assertImageProperties($content, 100, 100);
@@ -105,11 +105,11 @@ class VideoThumbnailGeneratorTest extends AbstractThumbnailGenerator
                 new FFMpegProcessor(
                     new ImageManipulator(
                         new ImageManager(
-                            new Driver
-                        )
-                    )
-                )
-            )
+                            new Driver(),
+                        ),
+                    ),
+                ),
+            ),
         );
     }
 }

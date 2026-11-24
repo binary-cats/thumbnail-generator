@@ -18,9 +18,9 @@ class WebPAwareThumbnailGeneratorTest extends AbstractThumbnailGenerator
     {
         $generator = $this->createThumbnailGenerator();
         $content = $generator->generate(
-            new UploadedFile(__DIR__.'/sources/image.png', 'image.png'),
+            new UploadedFile(__DIR__ . '/sources/image.png', 'image.png'),
             200,
-            300
+            300,
         );
 
         $this->assertIsArray($content);
@@ -36,16 +36,16 @@ class WebPAwareThumbnailGeneratorTest extends AbstractThumbnailGenerator
                 new ImageDriver(
                     new ImageManipulator(
                         new ImageManager(
-                            new Driver
-                        )
-                    )
-                )
+                            new Driver(),
+                        ),
+                    ),
+                ),
             ),
             new ImageManipulator(
                 new ImageManager(
-                    new Driver
-                )
-            )
+                    new Driver(),
+                ),
+            ),
         );
     }
 }
