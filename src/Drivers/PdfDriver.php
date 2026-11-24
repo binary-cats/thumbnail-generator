@@ -5,12 +5,13 @@ declare(strict_types=1);
 namespace Uc\ThumbnailGenerator\Drivers;
 
 use Illuminate\Http\UploadedFile;
+use Uc\ThumbnailGenerator\Enums\OutputFormat;
 use Uc\ThumbnailGenerator\Processors\PdfProcessor;
 
 /**
  * Driver for generating thumbnails for pdf documents.
  */
-class PdfDriver implements ThumbnailGenerationDriverInterface
+class PdfDriver implements OutputFormatAwareDriverInterface
 {
     /**
      * PdfDriver constructor.
@@ -33,8 +34,8 @@ class PdfDriver implements ThumbnailGenerationDriverInterface
      *
      * @throws \ImagickException
      */
-    public function generate(UploadedFile $file, int $width, int $height): ?string
+    public function generate(UploadedFile $file, int $width, int $height, ?OutputFormat $output = null): ?string
     {
-        return $this->pdfProcessor->generateThumbnail($file, $width, $height);
+        return $this->pdfProcessor->generateThumbnail($file, $width, $height, $output);
     }
 }

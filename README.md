@@ -39,6 +39,14 @@ The generic generator selects the first driver that supports the detected file t
 
 PDF, DOCX, ODT, and RTF previews default to JPEG. Set `THUMBNAIL_GENERATOR_OUTPUT=png` in your Laravel application's `.env` to generate PNG previews. The corresponding configuration key is `thumbnail-generator.output`.
 
+To override the format for one PDF or document preview, pass an `OutputFormat` to `generate()`. Subsequent calls use the configured default.
+
+```php
+use Uc\ThumbnailGenerator\Enums\OutputFormat;
+
+$thumbnail = $generator->generate($file, 320, 180, output: OutputFormat::PNG);
+```
+
 ## WebP output
 
 Wrap a generator to get both the thumbnail and a WebP copy in one call. If the underlying generator returns `null`, both results are `null`.

@@ -5,12 +5,13 @@ declare(strict_types=1);
 namespace Uc\ThumbnailGenerator\Drivers;
 
 use Illuminate\Http\UploadedFile;
+use Uc\ThumbnailGenerator\Enums\OutputFormat;
 use Uc\ThumbnailGenerator\Processors\DocumentProcessor;
 
 /**
  * Driver for generating thumbnails for odt documents.
  */
-class OdtDriver implements ThumbnailGenerationDriverInterface
+class OdtDriver implements OutputFormatAwareDriverInterface
 {
     public function __construct(
         protected readonly DocumentProcessor $documentProcessor,
@@ -30,8 +31,8 @@ class OdtDriver implements ThumbnailGenerationDriverInterface
      *
      * @throws \ImagickException
      */
-    public function generate(UploadedFile $file, int $width, int $height): ?string
+    public function generate(UploadedFile $file, int $width, int $height, ?OutputFormat $output = null): ?string
     {
-        return $this->documentProcessor->generateThumbnailFromOdt($file, $width, $height);
+        return $this->documentProcessor->generateThumbnailFromOdt($file, $width, $height, $output);
     }
 }

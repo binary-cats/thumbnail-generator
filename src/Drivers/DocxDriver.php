@@ -5,12 +5,13 @@ declare(strict_types=1);
 namespace Uc\ThumbnailGenerator\Drivers;
 
 use Illuminate\Http\UploadedFile;
+use Uc\ThumbnailGenerator\Enums\OutputFormat;
 use Uc\ThumbnailGenerator\Processors\DocumentProcessor;
 
 /**
  * Driver for generating thumbnails for docx documents.
  */
-class DocxDriver implements ThumbnailGenerationDriverInterface
+class DocxDriver implements OutputFormatAwareDriverInterface
 {
     public function __construct(
         protected readonly DocumentProcessor $documentProcessor,
@@ -30,8 +31,8 @@ class DocxDriver implements ThumbnailGenerationDriverInterface
      *
      * @throws \ImagickException
      */
-    public function generate(UploadedFile $file, int $width, int $height): ?string
+    public function generate(UploadedFile $file, int $width, int $height, ?OutputFormat $output = null): ?string
     {
-        return $this->documentProcessor->generateThumbnailFromDocx($file, $width, $height);
+        return $this->documentProcessor->generateThumbnailFromDocx($file, $width, $height, $output);
     }
 }

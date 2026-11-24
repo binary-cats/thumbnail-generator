@@ -6,6 +6,7 @@ namespace Uc\ThumbnailGenerator;
 
 use Illuminate\Http\UploadedFile;
 use Uc\ImageManipulator\ImageManipulator;
+use Uc\ThumbnailGenerator\Enums\OutputFormat;
 
 /**
  * WebPAwareThumbnailGenerator
@@ -52,9 +53,9 @@ class WebPAwareThumbnailGenerator
      *               An array containing the original thumbnail content and the WebP version.
      *               If generation fails, returns [null, null].
      */
-    public function generate(UploadedFile $file, int $width, int $height): array
+    public function generate(UploadedFile $file, int $width, int $height, ?OutputFormat $output = null): array
     {
-        $content = $this->generator->generate($file, $width, $height);
+        $content = $this->generator->generate($file, $width, $height, $output);
         if ($content === null) {
             return [null, null];
         }

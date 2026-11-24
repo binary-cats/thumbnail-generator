@@ -26,9 +26,9 @@ class PdfProcessor
      *
      * @throws ImagickException
      */
-    public function generateThumbnail(UploadedFile $file, int $width, int $height): ?string
+    public function generateThumbnail(UploadedFile $file, int $width, int $height, ?OutputFormat $output = null): ?string
     {
-        $content = $this->getFirstPageContent($file);
+        $content = $this->getFirstPageContent($file, $output);
         if ($content === null) {
             return null;
         }
@@ -42,13 +42,13 @@ class PdfProcessor
      *
      * @throws ImagickException
      */
-    protected function getFirstPageContent(UploadedFile $file): ?string
+    protected function getFirstPageContent(UploadedFile $file, ?OutputFormat $output): ?string
     {
         try {
             $imagick = new Imagick();
             // Read first page of the file.
             $imagick->readImage(sprintf('%s[0]', $file->path()));
-            $format = OutputFormat::from(config('thumbnail-generator.output'));
+            $format = $output ?? OutputFormat::from(config('thumbnail-generator.output'));
             $imagick->setImageFormat($format->value);
         } catch (ImagickException) {
             return null;

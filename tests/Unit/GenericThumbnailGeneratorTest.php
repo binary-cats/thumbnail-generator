@@ -9,6 +9,7 @@ use Intervention\Image\Drivers\Imagick\Driver;
 use Intervention\Image\ImageManager;
 use PHPUnit\Framework\Attributes\DataProvider;
 use Uc\ImageManipulator\ImageManipulator;
+use Uc\ThumbnailGenerator\Enums\OutputFormat;
 use Uc\ThumbnailGenerator\Processors\FFMpegProcessor;
 use Uc\ThumbnailGenerator\ThumbnailGeneratorFactory;
 
@@ -87,6 +88,32 @@ class GenericThumbnailGeneratorTest extends AbstractThumbnailGenerator
 
         $this->assertImageProperties($original, 100, 100, 'image/png');
         $this->assertImageProperties($webp, 100, 100, 'image/webp');
+    }
+
+    public static function documentPreviewProvider(): array
+    {
+        return [
+            ['pdf.pdf'],
+            ['document.docx'],
+            ['document.odt'],
+            ['document.rtf'],
+        ];
+    }
+
+    #[DataProvider('documentPreviewProvider')]
+    public function test_output_override_applies_to_one_document_preview(string $name): void
+    {
+        config(['thumbnail-generator.output' => 'png']);
+        $factory = $this->getThumbnailGeneratorFactory();
+        $generator = $factory->makeWebPAware($factory->createGenericThumbnailGenerator());
+        $file = new UploadedFile(__DIR__ . '/sources/' . $name, $name);
+
+        [$jpeg, $webp] = $generator->generate($file, 100, 100, output: OutputFormat::JPEG);
+        [$default] = $generator->generate($file, 100, 100);
+
+        $this->assertImageProperties($jpeg, 100, 100, 'image/jpeg');
+        $this->assertImageProperties($webp, 100, 100, 'image/webp');
+        $this->assertImageProperties($default, 100, 100, 'image/png');
     }
 
     protected function getThumbnailGeneratorFactory(): ThumbnailGeneratorFactory

@@ -4,7 +4,12 @@ declare(strict_types=1);
 
 namespace Uc\ThumbnailGenerator\Processors;
 
+use function base_path;
+
 use Illuminate\Http\UploadedFile;
+
+use function pathinfo;
+
 use PhpOffice\PhpSpreadsheet\Writer\IWriter;
 use PhpOffice\PhpWord\Exception\Exception as PhpWordException;
 use PhpOffice\PhpWord\IOFactory;
@@ -12,10 +17,10 @@ use PhpOffice\PhpWord\Settings;
 use PhpOffice\PhpWord\Writer\PDF;
 use PhpOffice\PhpWord\Writer\WriterInterface;
 
-use function base_path;
-use function pathinfo;
 use function stream_get_meta_data;
 use function tmpfile;
+
+use Uc\ThumbnailGenerator\Enums\OutputFormat;
 
 /**
  * Utility class for generating thumbnails of various documents.
@@ -38,11 +43,11 @@ class DocumentProcessor
      *
      * @throws \ImagickException
      */
-    public function generateThumbnailFromDocx(UploadedFile $file, int $width, int $height): ?string
+    public function generateThumbnailFromDocx(UploadedFile $file, int $width, int $height, ?OutputFormat $output = null): ?string
     {
         $writer = $this->createWordWriter('Word2007', $file->path());
 
-        return $this->generateThumbnail($writer, $width, $height);
+        return $this->generateThumbnail($writer, $width, $height, $output);
     }
 
     /**
@@ -51,11 +56,11 @@ class DocumentProcessor
      *
      * @throws \ImagickException
      */
-    public function generateThumbnailFromOdt(UploadedFile $file, int $width, int $height): ?string
+    public function generateThumbnailFromOdt(UploadedFile $file, int $width, int $height, ?OutputFormat $output = null): ?string
     {
         $writer = $this->createWordWriter('ODText', $file->path());
 
-        return $this->generateThumbnail($writer, $width, $height);
+        return $this->generateThumbnail($writer, $width, $height, $output);
     }
 
     /**
@@ -64,11 +69,11 @@ class DocumentProcessor
      *
      * @throws \ImagickException
      */
-    public function generateThumbnailFromRtf(UploadedFile $file, int $width, int $height): ?string
+    public function generateThumbnailFromRtf(UploadedFile $file, int $width, int $height, ?OutputFormat $output = null): ?string
     {
         $writer = $this->createWordWriter('RTF', $file->path());
 
-        return $this->generateThumbnail($writer, $width, $height);
+        return $this->generateThumbnail($writer, $width, $height, $output);
     }
 
     /**
@@ -91,7 +96,7 @@ class DocumentProcessor
      *
      * @throws \ImagickException
      */
-    protected function generateThumbnail(IWriter|WriterInterface|PDF|null $writer, int $width, int $height): ?string
+    protected function generateThumbnail(IWriter|WriterInterface|PDF|null $writer, int $width, int $height, ?OutputFormat $output = null): ?string
     {
         if ($writer === null) {
             return null;
@@ -99,7 +104,7 @@ class DocumentProcessor
 
         $writer->save($path = $this->getTemporaryPath());
 
-        return $this->generateThumbnailFromPdf($path, $width, $height);
+        return $this->generateThumbnailFromPdf($path, $width, $height, $output);
     }
 
     /**
@@ -116,12 +121,13 @@ class DocumentProcessor
      *
      * @throws \ImagickException
      */
-    protected function generateThumbnailFromPdf(string $path, int $width, int $height): ?string
+    protected function generateThumbnailFromPdf(string $path, int $width, int $height, ?OutputFormat $output = null): ?string
     {
         return $this->pdfProcessor->generateThumbnail(
             new UploadedFile($path, pathinfo($path, PATHINFO_FILENAME)),
             $width,
             $height,
+            $output,
         );
     }
 }
