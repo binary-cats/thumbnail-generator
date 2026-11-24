@@ -22,8 +22,8 @@ use Uc\ThumbnailGenerator\Processors\PdfProcessor;
 class ThumbnailGeneratorFactory
 {
     public function __construct(
-        protected FFMpegProcessor $ffmpegProcessor,
-        protected ImageManipulator $imageManipulator,
+        protected readonly FFMpegProcessor $ffmpegProcessor,
+        protected readonly ImageManipulator $imageManipulator,
     ) {}
 
     /**

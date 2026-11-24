@@ -26,8 +26,9 @@ use function tmpfile;
  */
 class DocumentProcessor
 {
-    public function __construct(protected PdfProcessor $pdfProcessor)
-    {
+    public function __construct(
+        protected readonly PdfProcessor $pdfProcessor,
+    ) {
         $domPdfPath = base_path('vendor/dompdf/dompdf');
 
         Settings::setPdfRendererPath($domPdfPath);

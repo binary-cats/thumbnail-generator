@@ -15,7 +15,9 @@ use Uc\ImageManipulator\ImageManipulator;
  */
 class PdfProcessor
 {
-    public function __construct(protected ImageManipulator $imageManipulator) {}
+    public function __construct(
+        protected readonly ImageManipulator $imageManipulator,
+    ) {}
 
     /**
      * Generate thumbnail of given file.

@@ -35,8 +35,8 @@ use Uc\ImageManipulator\ImageManipulator;
 class WebPAwareThumbnailGenerator
 {
     public function __construct(
-        protected ThumbnailGenerator $generator,
-        protected ImageManipulator $imageManipulator,
+        protected readonly ThumbnailGenerator $generator,
+        protected readonly ImageManipulator $imageManipulator,
     ) {}
 
     /**

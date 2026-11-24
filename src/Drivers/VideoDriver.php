@@ -15,7 +15,9 @@ use Uc\ThumbnailGenerator\Processors\FFMpegProcessor;
  */
 class VideoDriver implements ThumbnailGenerationDriverInterface
 {
-    public function __construct(protected FFMpegProcessor $processor) {}
+    public function __construct(
+        protected readonly FFMpegProcessor $processor,
+    ) {}
 
     /**
      * Determine whether the driver supports given file to generate thumbnail.

@@ -12,7 +12,9 @@ use Uc\ThumbnailGenerator\Processors\DocumentProcessor;
  */
 class OdtDriver implements ThumbnailGenerationDriverInterface
 {
-    public function __construct(protected DocumentProcessor $documentProcessor) {}
+    public function __construct(
+        protected readonly DocumentProcessor $documentProcessor,
+    ) {}
 
     /**
      * Determine whether the driver supports given file to generate thumbnail.

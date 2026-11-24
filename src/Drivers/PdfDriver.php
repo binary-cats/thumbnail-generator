@@ -15,7 +15,9 @@ class PdfDriver implements ThumbnailGenerationDriverInterface
     /**
      * PdfDriver constructor.
      */
-    public function __construct(protected PdfProcessor $pdfProcessor) {}
+    public function __construct(
+        protected readonly PdfProcessor $pdfProcessor,
+    ) {}
 
     /**
      * {@inheritDoc}

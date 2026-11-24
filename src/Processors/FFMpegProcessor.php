@@ -28,8 +28,9 @@ class FFMpegProcessor
 {
     protected FFMpeg $ffmpeg;
 
-    public function __construct(protected ImageManipulator $imageManipulator)
-    {
+    public function __construct(
+        protected readonly ImageManipulator $imageManipulator,
+    ) {
         $this->ffmpeg = FFMpeg::create([
             'ffmpeg.threads' => 4,
             'ffmpeg.timeout' => 300,

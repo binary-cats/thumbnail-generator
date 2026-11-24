@@ -17,7 +17,9 @@ use Uc\ImageManipulator\ImageManipulator;
  */
 class ImageDriver implements ThumbnailGenerationDriverInterface
 {
-    public function __construct(protected ImageManipulator $imageManipulator) {}
+    public function __construct(
+        protected readonly ImageManipulator $imageManipulator,
+    ) {}
 
     /**
      * Determine whether the driver supports given file to generate thumbnail.
