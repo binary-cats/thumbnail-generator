@@ -7,6 +7,7 @@ namespace Uc\ThumbnailGenerator\Tests;
 use Illuminate\Filesystem\Filesystem;
 use Illuminate\Foundation\Application;
 use Orchestra\Testbench\TestCase as BaseTestCase;
+use Uc\ImageManipulator\ImageManipulatorServiceProvider;
 use Uc\ThumbnailGenerator\ThumbnailGeneratorServiceProvider;
 
 class TestCase extends BaseTestCase
@@ -23,6 +24,7 @@ class TestCase extends BaseTestCase
         (new Filesystem())->ensureDirectoryExists($app->bootstrapPath('cache'));
 
         return [
+            ImageManipulatorServiceProvider::class,
             ThumbnailGeneratorServiceProvider::class,
         ];
     }

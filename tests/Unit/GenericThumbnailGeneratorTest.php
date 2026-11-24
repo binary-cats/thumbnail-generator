@@ -47,6 +47,48 @@ class GenericThumbnailGeneratorTest extends AbstractThumbnailGenerator
         $this->assertImageProperties($content, 100, 100, $mime);
     }
 
+    public static function specializedMediaProvider(): array
+    {
+        return [
+            'image' => ['createImageThumbnailGenerator', 'image.png', 'image/png'],
+            'audio' => ['createAudioThumbnailGenerator', 'audio_with_artwork.mp3', 'image/jpeg'],
+            'video' => ['createVideoThumbnailGenerator', 'mp4.mp4', 'image/jpeg'],
+            'document' => ['createDocumentThumbnailGenerator', 'document.docx', 'image/jpeg'],
+        ];
+    }
+
+    #[DataProvider('specializedMediaProvider')]
+    public function test_specialized_factory_generates_thumbnail(
+        string $factoryMethod,
+        string $name,
+        string $mime,
+    ): void {
+        $generator = $this->getThumbnailGeneratorFactory()->$factoryMethod();
+        $content = $generator->generate(new UploadedFile(__DIR__ . '/sources/' . $name, $name), 100, 100);
+
+        $this->assertImageProperties($content, 100, 100, $mime);
+    }
+
+    public function test_generate_when_format_is_unsupported_returns_null(): void
+    {
+        $generator = $this->getThumbnailGeneratorFactory()->createGenericThumbnailGenerator();
+        $file = UploadedFile::fake()->createWithContent('unsupported.txt', 'Plain text');
+
+        $this->assertNull($generator->generate($file, 100, 100));
+    }
+
+    public function test_webp_factory_returns_original_and_webp_thumbnails(): void
+    {
+        $factory = $this->getThumbnailGeneratorFactory();
+        $generator = $factory->makeWebPAware($factory->createImageThumbnailGenerator());
+        $file = new UploadedFile(__DIR__ . '/sources/image.png', 'image.png');
+
+        [$original, $webp] = $generator->generate($file, 100, 100);
+
+        $this->assertImageProperties($original, 100, 100, 'image/png');
+        $this->assertImageProperties($webp, 100, 100, 'image/webp');
+    }
+
     protected function getThumbnailGeneratorFactory(): ThumbnailGeneratorFactory
     {
         return new ThumbnailGeneratorFactory(

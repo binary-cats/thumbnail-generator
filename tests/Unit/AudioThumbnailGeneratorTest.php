@@ -26,6 +26,14 @@ class AudioThumbnailGeneratorTest extends AbstractThumbnailGenerator
         $this->assertImageProperties($content, 100, 100);
     }
 
+    public function test_generate_when_audio_has_no_artwork_returns_null(): void
+    {
+        $generator = $this->getThumbnailGenerator();
+        $file = new UploadedFile(__DIR__ . '/sources/audio_without_artwork.mp3', 'audio_without_artwork.mp3');
+
+        $this->assertNull($generator->generate($file, 100, 100));
+    }
+
     protected function getThumbnailGenerator(): ThumbnailGenerator
     {
         return new ThumbnailGenerator(

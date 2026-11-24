@@ -4,10 +4,9 @@ declare(strict_types=1);
 
 namespace Uc\ThumbnailGenerator;
 
-use App\Services\ImageManipulator\ImageManipulator;
-use App\Services\ThumbnailGenerator\Processors\FFMpegProcessor;
-use App\Services\ThumbnailGenerator\ThumbnailGeneratorFactory;
 use Illuminate\Support\ServiceProvider;
+use Uc\ImageManipulator\ImageManipulator;
+use Uc\ThumbnailGenerator\Processors\FFMpegProcessor;
 
 /**
  * Service provider of the package.

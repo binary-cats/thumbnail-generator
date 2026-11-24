@@ -25,6 +25,14 @@ class ImageThumbnailGeneratorTest extends AbstractThumbnailGenerator
         $this->assertImageProperties($content, 200, 300, 'image/png');
     }
 
+    public function test_generate_svg_returns_original_content(): void
+    {
+        $svg = '<svg xmlns="http://www.w3.org/2000/svg" width="200" height="200"><rect width="200" height="200"/></svg>';
+        $file = UploadedFile::fake()->createWithContent('image.svg', $svg);
+
+        $this->assertSame($svg, $this->createThumbnailGenerator()->generate($file, 100, 100));
+    }
+
     protected function createThumbnailGenerator(): ThumbnailGenerator
     {
         return new ThumbnailGenerator(

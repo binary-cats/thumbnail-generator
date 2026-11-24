@@ -26,6 +26,14 @@ class PdfThumbnailGeneratorTest extends AbstractThumbnailGenerator
         $this->assertImageProperties($content, 200, 300);
     }
 
+    public function test_generate_when_pdf_is_unreadable_returns_null(): void
+    {
+        $generator = $this->createThumbnailGenerator();
+        $file = UploadedFile::fake()->createWithContent('invalid.pdf', "%PDF-1.7\n");
+
+        $this->assertNull($generator->generate($file, 200, 300));
+    }
+
     protected function createThumbnailGenerator(): ThumbnailGenerator
     {
         return new ThumbnailGenerator(

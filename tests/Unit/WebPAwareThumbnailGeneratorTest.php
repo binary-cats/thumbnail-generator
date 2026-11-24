@@ -29,6 +29,14 @@ class WebPAwareThumbnailGeneratorTest extends AbstractThumbnailGenerator
         $this->assertImageProperties($content[1], 200, 300, 'image/webp');
     }
 
+    public function test_generate_when_format_is_unsupported_returns_two_nulls(): void
+    {
+        $generator = $this->createThumbnailGenerator();
+        $file = new UploadedFile(__DIR__ . '/sources/pdf.pdf', 'pdf.pdf');
+
+        $this->assertSame([null, null], $generator->generate($file, 200, 300));
+    }
+
     protected function createThumbnailGenerator(): WebPAwareThumbnailGenerator
     {
         return new WebPAwareThumbnailGenerator(

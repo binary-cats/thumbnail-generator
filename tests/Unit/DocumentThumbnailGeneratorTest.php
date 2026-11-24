@@ -7,6 +7,7 @@ namespace Uc\ThumbnailGenerator\Tests\Unit;
 use Illuminate\Http\UploadedFile;
 use Intervention\Image\Drivers\Imagick\Driver;
 use Intervention\Image\ImageManager;
+use PhpOffice\PhpWord\Settings;
 use Uc\ImageManipulator\ImageManipulator;
 use Uc\ThumbnailGenerator\Drivers\DocxDriver;
 use Uc\ThumbnailGenerator\Drivers\OdtDriver;
@@ -51,6 +52,22 @@ class DocumentThumbnailGeneratorTest extends AbstractThumbnailGenerator
         );
 
         $this->assertImageProperties($content, 100, 100);
+    }
+
+    public function test_generate_when_pdf_renderer_is_unavailable_returns_null(): void
+    {
+        $generator = $this->getThumbnailGenerator();
+        $file = new UploadedFile(__DIR__ . '/sources/document.docx', 'document.docx');
+        $renderer = Settings::getPdfRendererName();
+
+        // The configured renderer path contains Dompdf, so TCPDF cannot load from it.
+        Settings::setPdfRendererName(Settings::PDF_RENDERER_TCPDF);
+
+        try {
+            $this->assertNull($generator->generate($file, 100, 100));
+        } finally {
+            Settings::setPdfRendererName($renderer);
+        }
     }
 
     protected function getThumbnailGenerator(): ThumbnailGenerator
