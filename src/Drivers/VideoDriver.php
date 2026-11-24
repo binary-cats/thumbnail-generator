@@ -8,6 +8,7 @@ use Illuminate\Http\UploadedFile;
 
 use function in_array;
 
+use Uc\ThumbnailGenerator\Contracts\ThumbnailGenerationDriverInterface;
 use Uc\ThumbnailGenerator\Processors\FFMpegProcessor;
 
 /**

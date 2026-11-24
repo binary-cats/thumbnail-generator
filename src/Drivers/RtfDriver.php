@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Uc\ThumbnailGenerator\Drivers;
 
 use Illuminate\Http\UploadedFile;
+use Uc\ThumbnailGenerator\Contracts\OutputFormatAwareDriverInterface;
 use Uc\ThumbnailGenerator\Enums\OutputFormat;
 use Uc\ThumbnailGenerator\Processors\DocumentProcessor;
 

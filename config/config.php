@@ -24,7 +24,7 @@ return [
     |--------------------------------------------------------------------------
     |
     | PDF, DOCX, ODT, and RTF previews use this image format. Supported
-    | values are "jpeg" and "png".
+    | values are "jpeg", "png", and "webp".
     |
     */
 

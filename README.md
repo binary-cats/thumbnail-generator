@@ -34,17 +34,17 @@ The generic generator selects the first driver that supports the detected file t
 | SVG | Original SVG bytes at the original dimensions |
 | Video, including MP4, MOV, WebM, and AVI | A frame from 10% into the video, capped at 10 seconds |
 | Audio, including MP3 | Embedded artwork, or `null` when there is no visual stream |
-| PDF | First-page preview in JPEG or PNG |
+| PDF | First-page preview in JPEG, PNG, or WebP |
 | DOCX, ODT, RTF | First-page preview after conversion to PDF |
 
-PDF, DOCX, ODT, and RTF previews default to JPEG. Set `THUMBNAIL_GENERATOR_OUTPUT=png` in your Laravel application's `.env` to generate PNG previews. The corresponding configuration key is `thumbnail-generator.output`.
+PDF, DOCX, ODT, and RTF previews default to JPEG. Set `THUMBNAIL_GENERATOR_OUTPUT` to `jpeg`, `png`, or `webp` in your Laravel application's `.env` to choose the default. The corresponding configuration key is `thumbnail-generator.output`.
 
 To override the format for one PDF or document preview, pass an `OutputFormat` to `generate()`. Subsequent calls use the configured default.
 
 ```php
 use Uc\ThumbnailGenerator\Enums\OutputFormat;
 
-$thumbnail = $generator->generate($file, 320, 180, output: OutputFormat::PNG);
+$thumbnail = $generator->generate($file, 320, 180, output: OutputFormat::WEBP);
 ```
 
 ## WebP output

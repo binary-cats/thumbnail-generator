@@ -8,4 +8,5 @@ enum OutputFormat: string
 {
     case PNG = 'png';
     case JPEG = 'jpeg';
+    case WEBP = 'webp';
 }

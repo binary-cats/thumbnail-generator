@@ -11,6 +11,7 @@ use Illuminate\Http\UploadedFile;
 use function in_array;
 
 use Uc\ImageManipulator\ImageManipulator;
+use Uc\ThumbnailGenerator\Contracts\ThumbnailGenerationDriverInterface;
 
 /**
  * Driver for generating thumbnails for image files.

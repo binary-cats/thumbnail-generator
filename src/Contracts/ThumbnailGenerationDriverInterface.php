@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Uc\ThumbnailGenerator\Drivers;
+namespace Uc\ThumbnailGenerator\Contracts;
 
 use Illuminate\Http\UploadedFile;
 

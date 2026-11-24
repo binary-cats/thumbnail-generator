@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace Uc\ThumbnailGenerator;
 
 use Illuminate\Http\UploadedFile;
-use Uc\ThumbnailGenerator\Drivers\OutputFormatAwareDriverInterface;
-use Uc\ThumbnailGenerator\Drivers\ThumbnailGenerationDriverInterface;
+use Uc\ThumbnailGenerator\Contracts\OutputFormatAwareDriverInterface;
+use Uc\ThumbnailGenerator\Contracts\ThumbnailGenerationDriverInterface;
 use Uc\ThumbnailGenerator\Enums\OutputFormat;
 
 /**
