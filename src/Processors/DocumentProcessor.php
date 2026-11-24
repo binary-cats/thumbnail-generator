@@ -13,15 +13,13 @@ use PhpOffice\PhpWord\Writer\PDF;
 use PhpOffice\PhpWord\Writer\WriterInterface;
 
 use function base_path;
+use function pathinfo;
 use function stream_get_meta_data;
 use function tmpfile;
-use function pathinfo;
 
 /**
  * Utility class for generating thumbnails of various documents.
  * Under the hood wraps PhpOffice library.
- *
- * @package Uc\ThumbnailGenerator\Processors
  */
 class DocumentProcessor
 {
@@ -36,14 +34,10 @@ class DocumentProcessor
     /**
      * Generate thumbnail from docx document.
      *
-     * @param \Illuminate\Http\UploadedFile $file
-     * @param int                           $width
-     * @param int                           $height
      *
-     * @return string|null
      * @throws \ImagickException
      */
-    public function generateThumbnailFromDocx(UploadedFile $file, int $width, int $height): string|null
+    public function generateThumbnailFromDocx(UploadedFile $file, int $width, int $height): ?string
     {
         $writer = $this->createWordWriter('Word2007', $file->path());
 
@@ -53,14 +47,10 @@ class DocumentProcessor
     /**
      * Generate thumbnail from ODT (OpenOffice format) document.
      *
-     * @param \Illuminate\Http\UploadedFile $file
-     * @param int                           $width
-     * @param int                           $height
      *
-     * @return string|null
      * @throws \ImagickException
      */
-    public function generateThumbnailFromOdt(UploadedFile $file, int $width, int $height): string|null
+    public function generateThumbnailFromOdt(UploadedFile $file, int $width, int $height): ?string
     {
         $writer = $this->createWordWriter('ODText', $file->path());
 
@@ -70,14 +60,10 @@ class DocumentProcessor
     /**
      * Generate thumbnail from Rich text document.
      *
-     * @param \Illuminate\Http\UploadedFile $file
-     * @param int                           $width
-     * @param int                           $height
      *
-     * @return string|null
      * @throws \ImagickException
      */
-    public function generateThumbnailFromRtf(UploadedFile $file, int $width, int $height): string|null
+    public function generateThumbnailFromRtf(UploadedFile $file, int $width, int $height): ?string
     {
         $writer = $this->createWordWriter('RTF', $file->path());
 
@@ -86,11 +72,6 @@ class DocumentProcessor
 
     /**
      * Create instance of Word Writer.
-     *
-     * @param string $format
-     * @param string $path
-     *
-     * @return \PhpOffice\PhpWord\Writer\PDF|\PhpOffice\PhpWord\Writer\WriterInterface|null
      */
     protected function createWordWriter(string $format, string $path): PDF|WriterInterface|null
     {
@@ -106,14 +87,10 @@ class DocumentProcessor
     /**
      * Generate thumbnail with given writer instance.
      *
-     * @param \PhpOffice\PhpSpreadsheet\Writer\IWriter|\PhpOffice\PhpWord\Writer\WriterInterface|\PhpOffice\PhpWord\Writer\PDF|null $writer
-     * @param int                                                                                                                   $width
-     * @param int                                                                                                                   $height
      *
-     * @return string|null
      * @throws \ImagickException
      */
-    protected function generateThumbnail(IWriter|WriterInterface|PDF|null $writer, int $width, int $height): string|null
+    protected function generateThumbnail(IWriter|WriterInterface|PDF|null $writer, int $width, int $height): ?string
     {
         if ($writer === null) {
             return null;
@@ -126,8 +103,6 @@ class DocumentProcessor
 
     /**
      * Create temporary file and return its path.
-     *
-     * @return string
      */
     protected function getTemporaryPath(): string
     {
@@ -137,14 +112,10 @@ class DocumentProcessor
     /**
      * Generate thumbnail from PDF document.
      *
-     * @param string $path
-     * @param int    $width
-     * @param int    $height
      *
-     * @return string|null
      * @throws \ImagickException
      */
-    protected function generateThumbnailFromPdf(string $path, int $width, int $height): string|null
+    protected function generateThumbnailFromPdf(string $path, int $width, int $height): ?string
     {
         return $this->pdfProcessor->generateThumbnail(
             new UploadedFile($path, pathinfo($path, PATHINFO_FILENAME)),

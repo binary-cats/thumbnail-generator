@@ -9,26 +9,16 @@ use Uc\ThumbnailGenerator\Processors\PdfProcessor;
 
 /**
  * Driver for generating thumbnails for pdf documents.
- *
- * @package Uc\ThumbnailGenerator\Drivers
  */
 class PdfDriver implements ThumbnailGenerationDriverInterface
 {
     /**
      * PdfDriver constructor.
-     *
-     * @param PdfProcessor $pdfProcessor
      */
-    public function __construct(protected PdfProcessor $pdfProcessor)
-    {
-    }
+    public function __construct(protected PdfProcessor $pdfProcessor) {}
 
     /**
-     * @inheritDoc
-     *
-     * @param UploadedFile $file
-     *
-     * @return bool
+     * {@inheritDoc}
      */
     public function supports(UploadedFile $file): bool
     {
@@ -38,14 +28,10 @@ class PdfDriver implements ThumbnailGenerationDriverInterface
     /**
      * Generate thumbnail for given file.
      *
-     * @param \Illuminate\Http\UploadedFile $file
-     * @param int                           $width
-     * @param int                           $height
      *
-     * @return string|null
      * @throws \ImagickException
      */
-    public function generate(UploadedFile $file, int $width, int $height): string|null
+    public function generate(UploadedFile $file, int $width, int $height): ?string
     {
         return $this->pdfProcessor->generateThumbnail($file, $width, $height);
     }

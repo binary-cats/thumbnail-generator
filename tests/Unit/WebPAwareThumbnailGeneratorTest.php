@@ -14,7 +14,7 @@ use Uc\ThumbnailGenerator\WebPAwareThumbnailGenerator;
 
 class WebPAwareThumbnailGeneratorTest extends AbstractThumbnailGenerator
 {
-    public function testGenerate_Image_ReturnTwoThumbnails(): void
+    public function test_generate_image_return_two_thumbnails(): void
     {
         $generator = $this->createThumbnailGenerator();
         $content = $generator->generate(
@@ -36,14 +36,14 @@ class WebPAwareThumbnailGeneratorTest extends AbstractThumbnailGenerator
                 new ImageDriver(
                     new ImageManipulator(
                         new ImageManager(
-                            new Driver()
+                            new Driver
                         )
                     )
                 )
             ),
             new ImageManipulator(
                 new ImageManager(
-                    new Driver()
+                    new Driver
                 )
             )
         );

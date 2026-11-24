@@ -14,7 +14,7 @@ use Uc\ThumbnailGenerator\ThumbnailGenerator;
 
 class VideoThumbnailGeneratorTest extends AbstractThumbnailGenerator
 {
-    public function testGenerate_RegularMp4_ReturnThumbnail(): void
+    public function test_generate_regular_mp4_return_thumbnail(): void
     {
         $generator = $this->createThumbnailGenerator();
         $content = $generator->generate(
@@ -26,7 +26,7 @@ class VideoThumbnailGeneratorTest extends AbstractThumbnailGenerator
         $this->assertImageProperties($content, 100, 100);
     }
 
-    public function testGenerate_RegularFlv_ReturnThumbnail(): void
+    public function test_generate_regular_flv_return_thumbnail(): void
     {
         $generator = $this->createThumbnailGenerator();
         $content = $generator->generate(
@@ -38,7 +38,7 @@ class VideoThumbnailGeneratorTest extends AbstractThumbnailGenerator
         $this->assertImageProperties($content, 100, 100);
     }
 
-    public function testGenerate_RegularAvi_ReturnThumbnail(): void
+    public function test_generate_regular_avi_return_thumbnail(): void
     {
         $generator = $this->createThumbnailGenerator();
         $content = $generator->generate(
@@ -50,7 +50,7 @@ class VideoThumbnailGeneratorTest extends AbstractThumbnailGenerator
         $this->assertImageProperties($content, 100, 100);
     }
 
-    public function testGenerate_RegularMkv_ReturnThumbnail(): void
+    public function test_generate_regular_mkv_return_thumbnail(): void
     {
         $generator = $this->createThumbnailGenerator();
         $content = $generator->generate(
@@ -62,7 +62,7 @@ class VideoThumbnailGeneratorTest extends AbstractThumbnailGenerator
         $this->assertImageProperties($content, 100, 100);
     }
 
-    public function testGenerate_RegularAsf_ReturnThumbnail(): void
+    public function test_generate_regular_asf_return_thumbnail(): void
     {
         $generator = $this->createThumbnailGenerator();
         $content = $generator->generate(
@@ -74,7 +74,7 @@ class VideoThumbnailGeneratorTest extends AbstractThumbnailGenerator
         $this->assertImageProperties($content, 100, 100);
     }
 
-    public function testGenerate_RegularWebm_ReturnThumbnail(): void
+    public function test_generate_regular_webm_return_thumbnail(): void
     {
         $generator = $this->createThumbnailGenerator();
         $content = $generator->generate(
@@ -86,7 +86,7 @@ class VideoThumbnailGeneratorTest extends AbstractThumbnailGenerator
         $this->assertImageProperties($content, 100, 100);
     }
 
-    public function testGenerate_RegularMov_ReturnThumbnail(): void
+    public function test_generate_regular_mov_return_thumbnail(): void
     {
         $generator = $this->createThumbnailGenerator();
         $content = $generator->generate(
@@ -105,7 +105,7 @@ class VideoThumbnailGeneratorTest extends AbstractThumbnailGenerator
                 new FFMpegProcessor(
                     new ImageManipulator(
                         new ImageManager(
-                            new Driver()
+                            new Driver
                         )
                     )
                 )

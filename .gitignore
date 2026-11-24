@@ -2,5 +2,6 @@
 .phpunit.cache
 .phpunit.result.cache
 /bootstrap
+/composer.lock
 /coverage
 /vendor

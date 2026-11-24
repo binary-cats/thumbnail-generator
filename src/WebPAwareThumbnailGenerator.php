@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Uc\ThumbnailGenerator;
 
-use Uc\ImageManipulator\ImageManipulator;
 use Illuminate\Http\UploadedFile;
+use Uc\ImageManipulator\ImageManipulator;
 
 /**
  * WebPAwareThumbnailGenerator
@@ -31,35 +31,31 @@ use Illuminate\Http\UploadedFile;
  *
  * This class is useful in scenarios where WebP support is needed alongside traditional
  * image formats, ensuring compatibility with modern web standards.
- *
- * @package Uc\ThumbnailGenerator
  */
 class WebPAwareThumbnailGenerator
 {
     public function __construct(
         protected ThumbnailGenerator $generator,
         protected ImageManipulator $imageManipulator,
-    ) {
-    }
+    ) {}
 
     /**
      * Generate thumbnail of the given file in both the original format and WebP format.
      *
-     * @param \Illuminate\Http\UploadedFile $file
-     *        The uploaded file from which the thumbnail will be generated.
-     * @param int                           $width
-     *        The desired width of the thumbnail.
-     * @param int                           $height
-     *        The desired height of the thumbnail.
-     *
+     * @param  UploadedFile  $file
+     *                              The uploaded file from which the thumbnail will be generated.
+     * @param  int  $width
+     *                      The desired width of the thumbnail.
+     * @param  int  $height
+     *                       The desired height of the thumbnail.
      * @return array
-     *         An array containing the original thumbnail content and the WebP version.
-     *         If generation fails, returns [null, null].
+     *               An array containing the original thumbnail content and the WebP version.
+     *               If generation fails, returns [null, null].
      */
     public function generate(UploadedFile $file, int $width, int $height): array
     {
         $content = $this->generator->generate($file, $width, $height);
-        if (null === $content) {
+        if ($content === null) {
             return [null, null];
         }
 

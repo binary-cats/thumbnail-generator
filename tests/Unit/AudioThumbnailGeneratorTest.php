@@ -14,7 +14,7 @@ use Uc\ThumbnailGenerator\ThumbnailGenerator;
 
 class AudioThumbnailGeneratorTest extends AbstractThumbnailGenerator
 {
-    public function testGenerate_WhenAudioHasArtwork_ReturnsThumbnail(): void
+    public function test_generate_when_audio_has_artwork_returns_thumbnail(): void
     {
         $generator = $this->getThumbnailGenerator();
         $content = $generator->generate(
@@ -33,7 +33,7 @@ class AudioThumbnailGeneratorTest extends AbstractThumbnailGenerator
                 new FFMpegProcessor(
                     new ImageManipulator(
                         new ImageManager(
-                            new Driver()
+                            new Driver
                         )
                     )
                 )

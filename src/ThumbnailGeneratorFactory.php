@@ -18,21 +18,16 @@ use Uc\ThumbnailGenerator\Processors\PdfProcessor;
 
 /**
  * Factory for creating thumbnail generator instances.
- *
- * @package Uc\ThumbnailGenerator
  */
 class ThumbnailGeneratorFactory
 {
     public function __construct(
         protected FFMpegProcessor $ffmpegProcessor,
         protected ImageManipulator $imageManipulator
-    ) {
-    }
+    ) {}
 
     /**
      * Create instance of ThumbnailGenerator powered with all available drivers.
-     *
-     * @return \Uc\ThumbnailGenerator\ThumbnailGenerator
      */
     public function createGenericThumbnailGenerator(): ThumbnailGenerator
     {
@@ -52,8 +47,6 @@ class ThumbnailGeneratorFactory
 
     /**
      * Create instance of ThumbnailGenerator powered with ImageDriver.
-     *
-     * @return \Uc\ThumbnailGenerator\ThumbnailGenerator
      */
     public function createImageThumbnailGenerator(): ThumbnailGenerator
     {
@@ -66,8 +59,6 @@ class ThumbnailGeneratorFactory
 
     /**
      * Create instance of ThumbnailGenerator powered with AudioDriver.
-     *
-     * @return \Uc\ThumbnailGenerator\ThumbnailGenerator
      */
     public function createAudioThumbnailGenerator(): ThumbnailGenerator
     {
@@ -80,8 +71,6 @@ class ThumbnailGeneratorFactory
 
     /**
      * Create instance of ThumbnailGenerator powered with VideoDriver.
-     *
-     * @return \Uc\ThumbnailGenerator\ThumbnailGenerator
      */
     public function createVideoThumbnailGenerator(): ThumbnailGenerator
     {
@@ -94,8 +83,6 @@ class ThumbnailGeneratorFactory
 
     /**
      * Create instance of ThumbnailGenerator powered with various Document drivers.
-     *
-     * @return \Uc\ThumbnailGenerator\ThumbnailGenerator
      */
     public function createDocumentThumbnailGenerator(): ThumbnailGenerator
     {
@@ -110,11 +97,10 @@ class ThumbnailGeneratorFactory
      * WebPAwareThumbnailGenerator maintains all the original functionality while adding
      * support for WebP, a modern image format that provides superior compression.
      *
-     * @param \Uc\ThumbnailGenerator\ThumbnailGenerator $generator The original ThumbnailGenerator instance to be
-     *                                                             enhanced.
-     *
-     * @return \Uc\ThumbnailGenerator\WebPAwareThumbnailGenerator A new instance of WebPAwareThumbnailGenerator that
-     *                                                            supports WebP generation.
+     * @param  ThumbnailGenerator  $generator  The original ThumbnailGenerator instance to be
+     *                                         enhanced.
+     * @return WebPAwareThumbnailGenerator A new instance of WebPAwareThumbnailGenerator that
+     *                                     supports WebP generation.
      */
     public function makeWebPAware(ThumbnailGenerator $generator): WebPAwareThumbnailGenerator
     {
@@ -136,10 +122,6 @@ class ThumbnailGeneratorFactory
 
     /**
      * Create instance of DocumentProcessor.
-     *
-     * @param \Uc\ThumbnailGenerator\Processors\PdfProcessor $processor
-     *
-     * @return \Uc\ThumbnailGenerator\Processors\DocumentProcessor
      */
     protected function createDocumentProcessor(PdfProcessor $processor): DocumentProcessor
     {
@@ -148,8 +130,6 @@ class ThumbnailGeneratorFactory
 
     /**
      * Create instance of PdfProcessor.
-     *
-     * @return \Uc\ThumbnailGenerator\Processors\PdfProcessor
      */
     protected function createPdfProcessor(): PdfProcessor
     {

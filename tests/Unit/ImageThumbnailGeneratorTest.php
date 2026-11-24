@@ -13,7 +13,7 @@ use Uc\ThumbnailGenerator\ThumbnailGenerator;
 
 class ImageThumbnailGeneratorTest extends AbstractThumbnailGenerator
 {
-    public function testGenerate_Regular_ReturnThumbnail(): void
+    public function test_generate_regular_return_thumbnail(): void
     {
         $generator = $this->createThumbnailGenerator();
         $content = $generator->generate(
@@ -31,7 +31,7 @@ class ImageThumbnailGeneratorTest extends AbstractThumbnailGenerator
             new ImageDriver(
                 new ImageManipulator(
                     new ImageManager(
-                        new Driver()
+                        new Driver
                     )
                 )
             )

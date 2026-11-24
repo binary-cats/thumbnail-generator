@@ -7,17 +7,17 @@ namespace Uc\ThumbnailGenerator\Tests\Unit;
 use Illuminate\Http\UploadedFile;
 use Intervention\Image\Drivers\Imagick\Driver;
 use Intervention\Image\ImageManager;
-use Uc\ThumbnailGenerator\Drivers\RtfDriver;
 use Uc\ImageManipulator\ImageManipulator;
 use Uc\ThumbnailGenerator\Drivers\DocxDriver;
 use Uc\ThumbnailGenerator\Drivers\OdtDriver;
+use Uc\ThumbnailGenerator\Drivers\RtfDriver;
 use Uc\ThumbnailGenerator\Processors\DocumentProcessor;
 use Uc\ThumbnailGenerator\Processors\PdfProcessor;
 use Uc\ThumbnailGenerator\ThumbnailGenerator;
 
 class DocumentThumbnailGeneratorTest extends AbstractThumbnailGenerator
 {
-    public function testGenerate_RegularDocx_ReturnThumbnail(): void
+    public function test_generate_regular_docx_return_thumbnail(): void
     {
         $generator = $this->getThumbnailGenerator();
         $content = $generator->generate(
@@ -29,7 +29,7 @@ class DocumentThumbnailGeneratorTest extends AbstractThumbnailGenerator
         $this->assertImageProperties($content, 100, 100);
     }
 
-    public function testGenerate_RegularOdt_ReturnThumbnail(): void
+    public function test_generate_regular_odt_return_thumbnail(): void
     {
         $generator = $this->getThumbnailGenerator();
         $content = $generator->generate(
@@ -41,7 +41,7 @@ class DocumentThumbnailGeneratorTest extends AbstractThumbnailGenerator
         $this->assertImageProperties($content, 150, 200);
     }
 
-    public function testGenerate_Regular_ReturnThumbnail(): void
+    public function test_generate_regular_return_thumbnail(): void
     {
         $generator = $this->getThumbnailGenerator();
         $content = $generator->generate(
@@ -61,7 +61,7 @@ class DocumentThumbnailGeneratorTest extends AbstractThumbnailGenerator
                     new PdfProcessor(
                         new ImageManipulator(
                             new ImageManager(
-                                new Driver()
+                                new Driver
                             )
                         )
                     )
@@ -72,7 +72,7 @@ class DocumentThumbnailGeneratorTest extends AbstractThumbnailGenerator
                     new PdfProcessor(
                         new ImageManipulator(
                             new ImageManager(
-                                new Driver()
+                                new Driver
                             )
                         )
                     )
@@ -83,7 +83,7 @@ class DocumentThumbnailGeneratorTest extends AbstractThumbnailGenerator
                     new PdfProcessor(
                         new ImageManipulator(
                             new ImageManager(
-                                new Driver()
+                                new Driver
                             )
                         )
                     )

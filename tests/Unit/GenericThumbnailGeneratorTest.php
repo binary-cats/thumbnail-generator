@@ -7,10 +7,10 @@ namespace Uc\ThumbnailGenerator\Tests\Unit;
 use Illuminate\Http\UploadedFile;
 use Intervention\Image\Drivers\Imagick\Driver;
 use Intervention\Image\ImageManager;
+use PHPUnit\Framework\Attributes\DataProvider;
 use Uc\ImageManipulator\ImageManipulator;
 use Uc\ThumbnailGenerator\Processors\FFMpegProcessor;
 use Uc\ThumbnailGenerator\ThumbnailGeneratorFactory;
-use PHPUnit\Framework\Attributes\DataProvider;
 
 class GenericThumbnailGeneratorTest extends AbstractThumbnailGenerator
 {
@@ -34,10 +34,10 @@ class GenericThumbnailGeneratorTest extends AbstractThumbnailGenerator
     }
 
     #[DataProvider('mediaProvider')]
-    public function testGenerate_WithDifferentFormats_ReturnsThumbnail(
+    public function test_generate_with_different_formats_returns_thumbnail(
         string $path,
         string $name,
-        string|null $mime
+        ?string $mime
     ): void {
         $generator = $this
             ->getThumbnailGeneratorFactory()
@@ -53,13 +53,13 @@ class GenericThumbnailGeneratorTest extends AbstractThumbnailGenerator
             new FFMpegProcessor(
                 new ImageManipulator(
                     new ImageManager(
-                        new Driver()
+                        new Driver
                     )
                 )
             ),
             new ImageManipulator(
                 new ImageManager(
-                    new Driver()
+                    new Driver
                 )
             )
         );

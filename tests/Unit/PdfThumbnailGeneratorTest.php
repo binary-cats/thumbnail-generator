@@ -14,7 +14,7 @@ use Uc\ThumbnailGenerator\ThumbnailGenerator;
 
 class PdfThumbnailGeneratorTest extends AbstractThumbnailGenerator
 {
-    public function testGenerate_Regular_ReturnThumbnail(): void
+    public function test_generate_regular_return_thumbnail(): void
     {
         $generator = $this->createThumbnailGenerator();
         $content = $generator->generate(
@@ -33,7 +33,7 @@ class PdfThumbnailGeneratorTest extends AbstractThumbnailGenerator
                 new PdfProcessor(
                     new ImageManipulator(
                         new ImageManager(
-                            new Driver()
+                            new Driver
                         )
                     )
                 )
