@@ -47,6 +47,25 @@ use Uc\ThumbnailGenerator\Enums\OutputFormat;
 $thumbnail = $generator->generate($file, 320, 180, output: OutputFormat::WEBP);
 ```
 
+## Files on Laravel storage disks
+
+Pass a filesystem disk and a disk-relative path to generate a thumbnail from a private S3 object or any other Laravel disk that supports reading streams.
+
+```php
+use Illuminate\Support\Facades\Storage;
+use Uc\ThumbnailGenerator\Enums\OutputFormat;
+
+$thumbnail = $generator->generateFromDisk(
+    disk: Storage::disk('s3'),
+    path: 'contracts/agreement.pdf',
+    width: 320,
+    height: 180,
+    output: OutputFormat::PNG,
+);
+```
+
+The generator streams the source into a temporary local file and removes it after processing. Allow temporary disk space for the full source file per concurrent operation. Storage read failures throw an exception. An unsupported format returns `null`. The WebP decorator also accepts `generateFromDisk()` and returns the same pair as `generate()`.
+
 ## WebP output
 
 Wrap a generator to get both the thumbnail and a WebP copy in one call. If the underlying generator returns `null`, both results are `null`.

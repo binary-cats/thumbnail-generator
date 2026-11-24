@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Uc\ThumbnailGenerator;
 
+use Illuminate\Contracts\Filesystem\Filesystem;
 use Illuminate\Http\UploadedFile;
 use Uc\ImageManipulator\ImageManipulator;
 use Uc\ThumbnailGenerator\Enums\OutputFormat;
@@ -55,7 +56,21 @@ class WebPAwareThumbnailGenerator
      */
     public function generate(UploadedFile $file, int $width, int $height, ?OutputFormat $output = null): array
     {
-        $content = $this->generator->generate($file, $width, $height, $output);
+        return $this->withWebP($this->generator->generate($file, $width, $height, $output));
+    }
+
+    public function generateFromDisk(
+        Filesystem $disk,
+        string $path,
+        int $width,
+        int $height,
+        ?OutputFormat $output = null,
+    ): array {
+        return $this->withWebP($this->generator->generateFromDisk($disk, $path, $width, $height, $output));
+    }
+
+    private function withWebP(?string $content): array
+    {
         if ($content === null) {
             return [null, null];
         }
