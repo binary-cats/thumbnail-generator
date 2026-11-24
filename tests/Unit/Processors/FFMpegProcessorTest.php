@@ -28,9 +28,41 @@ class FFMpegProcessorTest extends TestCase
         // Simulate a successful frame save that writes no image bytes.
         $frame = $this->createMock(Frame::class);
         $frame->expects($this->once())->method('save')->willReturnSelf();
+        $processor = $this->processorWithFrame($frame);
+        $file = new UploadedFile(__DIR__ . '/../sources/mp4.mp4', 'mp4.mp4');
+
+        $this->assertNull($processor->generateVideoThumbnail($file, 100, 100));
+    }
+
+    public function test_partial_frame_is_removed_when_save_throws(): void
+    {
+        $framePath = null;
+        $error = new \RuntimeException('Frame save failed.');
+        $frame = $this->createMock(Frame::class);
+        $frame->expects($this->once())->method('save')
+            ->willReturnCallback(function (string $path) use (&$framePath, $error): never {
+                $framePath = $path;
+                file_put_contents($path, 'partial frame');
+                throw $error;
+            });
+
+        $processor = $this->processorWithFrame($frame);
+        $file = new UploadedFile(__DIR__ . '/../sources/mp4.mp4', 'mp4.mp4');
+
+        try {
+            $processor->generateVideoThumbnail($file, 100, 100);
+            $this->fail('Expected the frame save exception.');
+        } catch (\RuntimeException $exception) {
+            $this->assertSame($error, $exception);
+        }
+        $this->assertFileDoesNotExist($framePath);
+    }
+
+    private function processorWithFrame(Frame $frame): FFMpegProcessor
+    {
         $imageManipulator = new ImageManipulator(new ImageManager(new Driver()));
 
-        $processor = new class($imageManipulator, $frame) extends FFMpegProcessor
+        return new class($imageManipulator, $frame) extends FFMpegProcessor
         {
             public function __construct(ImageManipulator $imageManipulator, private readonly Frame $frame)
             {
@@ -42,8 +74,5 @@ class FFMpegProcessorTest extends TestCase
                 return $this->frame;
             }
         };
-        $file = new UploadedFile(__DIR__ . '/../sources/mp4.mp4', 'mp4.mp4');
-
-        $this->assertNull($processor->generateVideoThumbnail($file, 100, 100));
     }
 }

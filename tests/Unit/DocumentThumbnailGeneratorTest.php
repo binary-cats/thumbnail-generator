@@ -70,6 +70,25 @@ class DocumentThumbnailGeneratorTest extends AbstractThumbnailGenerator
         }
     }
 
+    public function test_intermediate_pdf_is_removed_after_rendering(): void
+    {
+        $pdfPath = null;
+        $pdfProcessor = $this->createMock(PdfProcessor::class);
+        $pdfProcessor->expects($this->once())->method('generateThumbnail')
+            ->willReturnCallback(function (UploadedFile $pdf) use (&$pdfPath): string {
+                $pdfPath = $pdf->getPathname();
+                $this->assertStringStartsWith('%PDF-', file_get_contents($pdfPath));
+
+                return 'thumbnail';
+            });
+
+        $file = new UploadedFile(__DIR__ . '/sources/document.docx', 'document.docx');
+        $processor = new DocumentProcessor($pdfProcessor);
+
+        $this->assertSame('thumbnail', $processor->generateThumbnailFromDocx($file, 100, 100));
+        $this->assertFileDoesNotExist($pdfPath);
+    }
+
     protected function getThumbnailGenerator(): ThumbnailGenerator
     {
         return new ThumbnailGenerator(

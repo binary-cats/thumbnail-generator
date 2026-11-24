@@ -102,17 +102,19 @@ class DocumentProcessor
             return null;
         }
 
-        $writer->save($path = $this->getTemporaryPath());
+        $temporaryPdf = tmpfile();
+        if ($temporaryPdf === false) {
+            throw new \RuntimeException('Unable to create a temporary PDF.');
+        }
 
-        return $this->generateThumbnailFromPdf($path, $width, $height, $output);
-    }
+        try {
+            $path = stream_get_meta_data($temporaryPdf)['uri'];
+            $writer->save($path);
 
-    /**
-     * Create temporary file and return its path.
-     */
-    protected function getTemporaryPath(): string
-    {
-        return stream_get_meta_data(tmpfile())['uri'];
+            return $this->generateThumbnailFromPdf($path, $width, $height, $output);
+        } finally {
+            fclose($temporaryPdf);
+        }
     }
 
     /**

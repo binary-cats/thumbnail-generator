@@ -113,9 +113,18 @@ class FFMpegProcessor
      */
     protected function getFrameContent(Frame $frame, ?int $width, ?int $height): ?string
     {
-        $path = stream_get_meta_data(tmpfile())['uri'];
-        $frame->save($path, true);
-        $content = @file_get_contents($path);
+        $temporaryFrame = tmpfile();
+        if ($temporaryFrame === false) {
+            throw new \RuntimeException('Unable to create a temporary frame.');
+        }
+
+        try {
+            $path = stream_get_meta_data($temporaryFrame)['uri'];
+            $frame->save($path, true);
+            $content = @file_get_contents($path);
+        } finally {
+            fclose($temporaryFrame);
+        }
 
         if (empty($content)) {
             return null;
