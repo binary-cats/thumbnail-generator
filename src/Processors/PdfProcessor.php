@@ -8,6 +8,7 @@ use Illuminate\Http\UploadedFile;
 use Imagick;
 use ImagickException;
 use Uc\ImageManipulator\ImageManipulator;
+use Uc\ThumbnailGenerator\Enums\OutputFormat;
 
 /**
  * Utility class for generating thumbnails of pdf documents.
@@ -47,7 +48,8 @@ class PdfProcessor
             $imagick = new Imagick();
             // Read first page of the file.
             $imagick->readImage(sprintf('%s[0]', $file->path()));
-            $imagick->setImageFormat('jpeg');
+            $format = OutputFormat::from(config('thumbnail-generator.output'));
+            $imagick->setImageFormat($format->value);
         } catch (ImagickException) {
             return null;
         }

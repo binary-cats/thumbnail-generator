@@ -26,6 +26,16 @@ class PdfThumbnailGeneratorTest extends AbstractThumbnailGenerator
         $this->assertImageProperties($content, 200, 300);
     }
 
+    public function test_generate_when_output_is_png_returns_png_thumbnail(): void
+    {
+        config(['thumbnail-generator.output' => 'png']);
+        $file = new UploadedFile(__DIR__ . '/sources/pdf.pdf', 'pdf.pdf');
+
+        $content = $this->createThumbnailGenerator()->generate($file, 200, 300);
+
+        $this->assertImageProperties($content, 200, 300, 'image/png');
+    }
+
     public function test_generate_when_pdf_is_unreadable_returns_null(): void
     {
         $generator = $this->createThumbnailGenerator();

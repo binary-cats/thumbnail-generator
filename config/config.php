@@ -1,5 +1,7 @@
 <?php
 
+use Uc\ThumbnailGenerator\Enums\OutputFormat;
+
 return [
 
     /*
@@ -15,5 +17,17 @@ return [
 
     'ffmpeg_binary_path' => env('FFMPEG_BINARY_PATH'),
     'ffprobe_binary_path' => env('FFPROBE_BINARY_PATH'),
+
+    /*
+    |--------------------------------------------------------------------------
+    | Document Preview Format
+    |--------------------------------------------------------------------------
+    |
+    | PDF, DOCX, ODT, and RTF previews use this image format. Supported
+    | values are "jpeg" and "png".
+    |
+    */
+
+    'output' => env('THUMBNAIL_GENERATOR_OUTPUT', OutputFormat::JPEG->value),
 
 ];
